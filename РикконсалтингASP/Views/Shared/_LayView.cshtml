@@ -1,0 +1,107 @@
+﻿
+@{
+    ViewData["Title"] = "Главная";
+}
+@*@{
+        Layout = null;
+    }*@
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Главная</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    @*<link href="~/css/Style.css" rel="stylesheet" />*@
+    @*<link asp-href-include="~/css/**/*.css" />*@
+
+    @*<link href="~/css/StyleSidebar.css" rel="stylesheet" />*@
+    <link rel="stylesheet" href="~/css/StyleSidebar.css" asp-append-version="true" />
+    @*<link href="~css\bootstrap.min.css" rel="stylesheet" />*@
+    @*<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>*@
+
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+</head>
+<body>
+
+    <div class="container-fluid">
+        <div class="wrapper">
+            <div class="sidebar">
+                <h2>Меню</h2>
+                <ul>
+                    <li><a href="#"><i class="fas fa-home"></i>Home</a></li>
+                    <li><a href="#"><i class="fas fa-user"></i>Profile</a></li>
+                    <li><a href="#"><i class="fas fa-address-card"></i>About</a></li>
+                    <li><a href="#"><i class="fas fa-project-diagram"></i>portfolio</a></li>
+
+
+
+                    <li>
+
+                        <a asp-controller="Сотрудник" asp-action="Главная"><i class="fas fa-blog"></i>Сотрудники</a>
+
+                        @*<select id="selectId">
+                                <option value="">Сотрудники</option>
+                                <option value="">Добавить сотрудника</option>
+                            </select>*@
+
+
+
+                    </li>
+
+
+
+                    <li><a asp-controller="AdminPanel" asp-action="Panel"><i class="fas fa-user-lock"></i>Админ панель</a></li>
+                    <li><a asp-controller="Account" asp-action="Logout1"><i class="fas fa-door-open"></i>Выйти</a></li>
+                    <li><a asp-controller="СотрудникиController1" asp-action="AllSotrudnik1"><i class="fas fa-address-book"></i>Сотрудники</a></li>
+                </ul>
+                @*<div class="social_media">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>*@
+            </div>
+
+
+            <div class="main_content">
+                
+                <div class="header">@User.Identity.Name</div>
+
+                <div class="info">
+
+                    @RenderBody()
+
+                    @*@RenderSection("Scripts", required: false)*@
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2021 - Рикконсалтинг - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+
+
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
+    @*<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>*@
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/8709e3c1f3.js" crossorigin="anonymous"></script>
+    @*<script src="~\js\bootstrap.min.js"></script>*@
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <script src="https://getbootstrap.com/docs/3.4/assets/js/vendor/holder.min.js"></script>
+
+
+</body>
+</html>

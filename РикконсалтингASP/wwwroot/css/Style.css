@@ -1,0 +1,77 @@
+﻿body {
+    background-color: rgb(230, 230, 250);
+    background-image: url('~/img/header-slide-1.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: auto;
+    /*}*/
+    /*{
+font-size: 14px;
+}*/
+    /* на sm */
+    /*@media (min-width: 768px) {
+    html {
+        font-size: 16px !important;
+    }
+}*/
+    /* на md */
+    /*@media (min-width: 992px) {
+    html {
+        font-size: 18px !important;
+    }
+}*/
+    /* на lg */
+    /*@media (min-width: 1200px) {
+    html {
+        font-size: 20px !important;
+    }*/
+}
+div.login-logout-tab div.card.header {
+    padding: 0px 0px 12px 0px;
+}
+
+div.login-logout-tab li.nav-tabs {
+    margin: 0px 0px -12px 0px;
+}
+
+div.login-logout-tab li.nav-item {
+    width: 50%
+}
+
+div.login-logout-tab a.nav-link {
+    font-size: 25px;
+    color: #495057;
+    text-align: center;
+}
+/*//Это для браузера Chrome:*/
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+/*
+//Это для браузера Firefox:*/
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+/*input[type="number"]:hover,*/
+/*input[type="number"]:focus {
+    -moz-appearance: number-input;
+}*/
+
+/*//Для других*/
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.navbar .dropdown-menu {
+    color: #999;
+    font-weight: normal;
+    border-radius: 1px;
+    border-color: #e5e5e5;
+    box-shadow: 0 2px 8px rgba(0,0,0,.05);
+}

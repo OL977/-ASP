@@ -1,0 +1,7 @@
+﻿@model IEnumerable<РикконсалтингASP.Models.Сотрудник>
+<select id="fio" name="ФИОСборное">
+    @foreach (var item in Model)
+    {
+        <option value="@item.ФИОСборное">@item.ФИОСборное</option>
+    }
+</select>

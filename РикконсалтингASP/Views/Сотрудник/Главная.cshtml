@@ -1,0 +1,292 @@
+﻿@*@model IEnumerable<String>*@
+@*@model РикконсалтингASP.Models.Сотрудник*@
+@model РикконсалтингASP.ViewModels.DropdownОргСотр.CompanyDrop
+@using РикконсалтингASP.ViewModels.СотрудникLemel
+@{
+
+    Layout = "~/Views/Shared/_LayView.cshtml";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    @*<meta name="viewport" content="width=device-width">*@
+
+    @*<link href="~/css/SelectStyle.css" rel="stylesheet" />*@
+    <style>
+        .selectwidthauto {
+            width: 100% !important;
+        }
+
+        label.degust {
+            position: relative;
+        }
+
+        label.new:after {
+            content: '<>';
+            font: 11px "Consolas", monospace;
+            color: #666;
+            -webkit-transform: rotate(90deg);
+            -moz-transform: rotate(90deg);
+            -ms-transform: rotate(90deg);
+            transform: rotate(90deg);
+            right: 8px;
+            top: 2px;
+            padding: 0 0 2px;
+            border-bottom: 1px solid #ddd;
+            position: absolute;
+            pointer-events: none;
+        }
+
+
+        label.new1:before {
+            content: '';
+            right: 6px;
+            top: 0px;
+            width: 20px;
+            height: 20px;
+            background: #eee;
+            position: absolute;
+            pointer-events: none;
+            display: block;
+        }
+       
+
+        select.sel1 {
+            width: 380px;
+            height: 35px;
+            padding: 4px;
+            border-radius: 4px;
+            box-shadow: 2px 2px 8px #999;
+            background: #eee;
+            border: none;
+            outline: none;
+            display: inline-block;
+            -webkit-appearance: none;
+            -moz-appearance: none;            
+            cursor: pointer;
+        }
+        select.sel2 {
+            /* min-width: 50%;
+            max-width: 100%;*/
+            /*width: 100% !important;*/
+            height: 35px;
+            padding: 4px;
+            border-radius: 4px;
+            box-shadow: 2px 2px 8px #999;
+            background: #eee;
+            border: none;
+            outline: none;
+            display: inline-block;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            cursor: pointer;
+        }
+        .TextColor {
+            color: whitesmoke;
+            font-weight: bold;
+        }
+        
+    </style>
+
+</head>
+<body>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4 py-1">
+                <form name="Mi">
+                    <div>
+                        <p>Организация</p>
+                        <label id="Organiz" class="degust new new1">
+                            <select class="sel1"  id="CompanydropId" name="CompanyDroplist" asp-for="ID" asp-items="@(new SelectList(ViewBag.company,"ID","Name"))">
+                                <option>Выберите организацию</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div>
+                        <p>Сотрудник</p>
+                        <label class="degust new new1">
+                            <select class="sel1" id="EmployeId" name="EmployeDroplist" asp-for="Name" asp-items="@(new SelectList(String.Empty,"ID","Name"))">
+                                <option>Выберите сотрудника</option>
+                            </select>
+                        </label>
+                    </div>
+
+                </form>
+
+            </div>
+
+            @*Аккордион*@
+        <div class="col-md-8 py-1">
+            <div id="accordion" role="tablist">
+                <div class="card">
+                    <div class="card-header" role="tab" id="headingOne">
+                        <h5 class="mb-0">
+                            <a data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Добавить сотрудника
+                            </a>
+                        </h5>
+                    </div>
+
+                    <div id="collapseOne" class="collapse m-2" style="background-color:#0081CB" role="tabpanel" aria-labelledby="headingOne" >
+                        <div class="card-body">
+                            <div>
+                                <div class="container-fluid">                                   
+                                        
+                                        @*<div class="form-group row py-2">
+                                            <label class="TextColor col-md-3 col-form-label" for="Selform">Организация</label>                             
+                                        
+
+                                            <select class="form-control form-control-sm col-md-9" id="CompanydropId2" name="CompanyDroplist" asp-for="ID" asp-items="@(new SelectList(ViewBag.company,"ID","Name"))">
+                                                <option>Выберите организацию</option>
+                                            </select>
+
+                                        </div>*@                                  
+                                    
+                                    <div class="TextColor">                                     
+                                        @await Html.PartialAsync("_добавитьСотруд", new Добавить { CompanyDropList= ViewBag.добСотруд})
+                                    </div>
+                                </div>
+                            </div>                              
+                        </div>
+                     </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" role="tab" id="headingTwo">
+                        <h5 class="mb-0">
+                            <a class="collapsed" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                Редактировать сотрудника
+                            </a>
+                        </h5>
+                    </div>
+                    <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
+                        <div class="card-body">
+                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+
+    </div>         
+       
+
+    <div id="selection"></div>
+
+    @*<script src="~/lib/jquery/dist/jquery.min.js"></script>*@
+
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    
+    <script>
+
+        var rend = Mi.CompanyDroplist
+        function chngOpt() {
+            var selection = document.getElementById("selection");
+            var selectedOption = rend.options[rend.selectedIndex];
+            selection.textContent = "Вы выбрали: " + selectedOption.text;
+
+            @*var url = '@Url.Action("getEmplbyId")/' + selectedOption.value*@
+            var url = '@Url.Action("getEmplbyId")'
+
+            @*var url = '@Url.Content("~/")' + "Сотрудник/getEmplbyId";*@
+            $.getJSON(url, { id: selectedOption.value }, function (data) {
+              /*  $.getJSON(url, { id: $(ddsr).val() }, function (data) {*/
+
+            /*$.getJSON(url, function (data) {*/
+                var items = '';
+                $("#EmployeId").empty();
+                $.each(data, function (i, row) {
+                    items += "<option value='" + row.value + "'>" + row.text + "</option>";
+
+                })
+
+                $("#EmployeId").html(items);
+            })
+        }
+        rend.addEventListener("change", chngOpt);
+
+       
+         
+
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    @*<div class="container-fluid">
+            <div class="row">
+                <div class="offset-2 col-md-3">
+                    <label asp-for="ФИОСборное"></label>
+                    <select asp-for="ФИОСборное" asp-items="@ViewBag.Sotr"></select>
+                </div>
+            </div>
+        </div>*@
+
+    @*<h3>Выберите организацию</h3>
+        @Html.DropDownList("org", ViewBag.org as SelectList, new { id = "НазвОрг" })
+        <h3>Выберите сотрудника</h3>
+        @Html.DropDownList("sotr", ViewBag.sotr as SelectList, new { id = "ФИОСборное" })*@
+
+    @*@section scripts{
+            <script type="text/javascript">
+        $(function () {
+
+            $('#НазвОрг').change(function()
+            {
+                // получаем выбранный id
+                var id = $(this).text();
+                $.ajax({
+                    type: 'GET',
+                    url: '@Url.Action("_GetItems")/' + id,
+                    success: function (data) {
+
+                        // заменяем содержимое присланным частичным представлением
+                        $('#ФИОСборное').replaceWith(data);
+                    }
+                });
+            });
+        })
+            </script>
+        }*@
+    @*<select>
+            @foreach (var op in Model)
+            {
+                <option>@op</option>
+            }
+        </select>*@
+
+
+    <h1>Главная</h1>
+
+
+
+</body>
+
+</html>
+
+
+

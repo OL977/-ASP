@@ -1,0 +1,209 @@
+﻿@using РикконсалтингASP.Models
+@using  РикконсалтингASP.ViewModels.СотрудникLemel
+@model РикконсалтингASP.ViewModels.СотрудникLemel.Добавить
+@*@model List<CompanyDrop>;*@
+
+<div class="container-fluid">
+    <form method="post" name="addes" asp-antiforgery="true" class="needs-validation" asp-action="AddSotrud" asp-controller="Сотрудник" novalidate>
+        @*asp-action="ДобавитьСотрудн" asp-controller="Сотрудник"*@
+
+        <div class="form-group row">
+
+            <label asp-for="Организация" class="col-md-3 col-form-label"></label>
+            <select id="CompanydropId" name="CompanyDroplist" class="form-control form-control-sm col-md-9" required>
+                <option value="0">Выберите организацию</option>
+                @foreach (CompanyLemel d in Model.CompanyDropList)
+                {
+                    <option value="@d.Id">@d.Название</option>
+                }
+
+            </select>
+
+            <select id="CompanydropId2" name="CompanyDroplist2" class="form-control form-control-sm col-md-9" hidden asp-items="@(new SelectList(String.Empty,"ID","Name"))">
+            </select>
+
+
+            <div class="invalid-feedback offset-3 col-md-9">
+                <span style="color: white;font-weight: bold; font-size:14px;">Проверьте введенные данные!</span>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="Фамилия" class="col-md-3 col-form-label"></label>
+
+            <input type="text" asp-for="Фамилия" id="Фамилия" placeholder="Фамилия" class="form-control col-md-9" required />
+
+            <div class="invalid-feedback offset-3 col-md-9">
+                <span style="color: white;font-weight: bold; font-size:14px;">Проверьте введенные данные!</span>
+            </div>
+        </div>
+
+
+        <div class="form-group row">
+            <label asp-for="Имя" class="col-md-3 col-form-label"></label>
+            <input type="text" asp-for="Имя" id="Имя" placeholder="Имя" class="form-control col-md-9" required />
+            @*<div class="valid-feedback offset-3 col-md-9">
+                Принято!
+            </div>*@
+            <div class="invalid-feedback offset-3 col-md-9">
+                <span style="color: white;font-weight: bold; font-size:14px;">Проверьте введенные данные!</span>
+            </div>
+        </div>
+
+
+        <div class="form-group row">
+            <label asp-for="Отчество" class="col-md-3 col-form-label"></label>
+            <input type="text" asp-for="Отчество" id="Отчество" placeholder="Отчество" class="form-control col-md-9" required />
+            @*<div class="offset-3 col-md-9 valid-feedback">
+                Принято!
+            </div>*@
+            <div class="invalid-feedback offset-3 col-md-9">
+                <span style="color: white;font-weight: bold; font-size:14px;">Проверьте введенные данные!</span>
+            </div>
+        </div>
+
+
+
+        @*<div>
+            @Html.LabelFor(m => m.CompanyDrop)
+            @Html.DropDownListFor(m => m.CompanyDrop.Id, new SelectList(ViewBag.company, "Id", "Название"))
+        </div>*@
+        <div class="offset-md-10 col-md-3">
+            <button class="btn btn-outline-light" type="submit" name="Добавить2" id="btnCl">Добавить</button>
+        </div>
+
+        <div id="result"></div>
+    </form>
+
+</div>
+
+<script src="/lib/jquery/dist/jquery.js"></script>
+
+<script>
+    var mySet = new Set();
+(function () {
+    'use strict';
+    window.addEventListener('load', function () {
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.getElementsByClassName('needs-validation');
+        // Loop over them and prevent submission
+        var validation = Array.prototype.filter.call(forms, function (form) {
+            form.addEventListener('submit', function (event) {
+                if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                };
+
+                /*sendForm();*/
+                form.classList.add('was-validated');
+
+                if (form.checkValidity() === true) {
+                    sendForm();
+                }
+               
+            }, false);
+        });
+    }, false);
+})();
+
+   
+
+
+
+
+var rend4 = addes.CompanyDroplist
+function chngOpt() {
+    var selectedOption = rend4.options[rend4.selectedIndex];
+
+    var url = '@Url.Action("getEmplbyId")'
+
+    $.getJSON(url, { id: selectedOption.value }, function (data) {
+
+        var items = '';
+        $("#CompanydropId2").empty();
+
+        $.each(data, function (i, row) {
+            items += "<option value='" + row.value + "'>" + row.text + "</option>";
+            mySet.add(row.text);
+
+        })
+        ///*хранилище*/
+        //try {
+        //    sessionStorage.setItem("colUsers", JSON.stringify(mySet));
+        //} catch (e) {
+        //    if (e == QUOTA_EXCEEDED_ERR) {
+        //        alert('Лимит превышен');
+        //    }
+        //}
+
+    });
+}
+
+rend4.addEventListener("change", chngOpt);
+
+
+
+
+function sendForm(e) {
+    var rend = addes.CompanyDroplist
+    var selval = rend.options[rend.selectedIndex];
+    if (selval.value === "0") {
+        alert("Выберите организацию!");
+        e.preventDefault();
+    }
+    else {
+        var Имя = document.getElementById("Имя");
+        var Фамилия = document.getElementById("Фамилия");
+        var Отчество = document.getElementById("Отчество");
+        var FIO = (Фамилия.value + " " + Имя.value + " " + Отчество.value).trim();
+
+        //let ft = sessionStorage.length;
+
+        //var userss = JSON.parse(sessionStorage.getItem("colUsers"));
+
+        //if (myset.has(FIO)) {
+        //    alert("Сотрудник " + value + " уже существует в базе!");
+        //    e.preventDefault();
+        //    return
+        //}
+
+        mySet.forEach(function (value) {
+            if (value == FIO) {
+                alert("Сотрудник " + value + " уже существует в базе!");
+                e.preventDefault();
+                exit
+            }
+        });
+
+        @*var Mset = new Set;
+        var url = '@Url.Action("AddSotrud")'
+
+        $.getJSON(url, { FIO:FIO, CompanyDroplist:selval.value }, function (data) {
+            $.each(data, function (i, row) {
+                items += "<option value='" + row.value + "'>" + row.text + "</option>";
+                Mset.add(row.text);
+
+            })
+        });*@
+        e.preventDefault();
+        var url = '@Url.Action("AddSotrud")'
+        $.post(url, { Фамилия: Фамилия.value, Имя: Имя.value, Отчество: Отчество.value, CompanyDroplist: selval.value },
+            function (data) {
+
+                $('#result').load(data);
+                var txt = data.value
+                alert(txt);
+                /*$('#result').html(data);*/
+            }
+        );
+    }
+};
+
+//var sendButton = document.addes.Добавить2;
+//sendButton.addEventListener("click", sendForm);
+</script>
+
+
+
+
+
